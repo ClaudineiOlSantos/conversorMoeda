@@ -34,23 +34,40 @@ class _HomeState extends State<Home> {
   double euro;
 
   void _realChanged(String value) {
+    if(value.isEmpty) {
+      _clearAll();
+      return;
+    }
     double real = double.parse(value);
     dolarController.text = (real / dolar).toStringAsFixed(2);
     euroController.text = (real / euro).toStringAsFixed(2);
   }
 
   void _dolarChanged(String value) {
+    if(value.isEmpty) {
+      _clearAll();
+      return;
+    }
     double dolar = double.parse(value);
     realController.text = (dolar * this.dolar).toStringAsFixed(2);
     euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
   }
 
   void _euroChanged(String value) {
+    if(value.isEmpty) {
+      _clearAll();
+      return;
+    }
     double euro = double.parse(value);
     realController.text = (euro * this.euro).toStringAsFixed(2);
     dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
   }
 
+  void _clearAll(){
+    realController.text = "";
+    dolarController.text = "";
+    euroController.text = "";
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
